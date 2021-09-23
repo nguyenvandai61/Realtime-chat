@@ -12,7 +12,9 @@
         </div>
         <v-card class="message-box__content__message">
           <span>{{ content }}</span>
+          <reaction-emotion :emotions="reaction_emotions"></reaction-emotion>
         </v-card>
+        <reaction-emotion-picker :emotion_picked="{}"></reaction-emotion-picker>
       </div>
     </div>
     <div class="message-box__time">
@@ -22,6 +24,8 @@
 </template>
 <script lang="ts">
 import Vue from "vue";
+import ReactionEmotion from "./MessageBox/ReactionEmotion.vue";
+import ReactionEmotionPicker from "./MessageBox/ReactionEmotionPicker.vue";
 
 export default Vue.extend({
   name: "MessageBox",
@@ -41,6 +45,13 @@ export default Vue.extend({
     time: {
       type: String,
     },
+    reaction_emotions: {
+      type: Object,
+    },
+  },
+  components: {
+    ReactionEmotion,
+    ReactionEmotionPicker,
   },
 });
 </script>
@@ -53,6 +64,7 @@ export default Vue.extend({
     margin-bottom: 5px;
     margin-left: 5px;
     float: right;
+    position: relative;
 
     .message-box__content__message {
       display: inline-block;
@@ -60,6 +72,11 @@ export default Vue.extend({
       border-radius: 15px;
       padding: 2px 7px;
       color: white !important;
+    }
+    .reaction-emotion-picker {
+      position: absolute;
+      top: -35px;
+      right: 10px;
     }
 
     &.guest {
@@ -73,12 +90,22 @@ export default Vue.extend({
       }
       .message-box__content__right {
         display: inline-block;
+        position: relative;
         .message-box__content__name {
           font-size: 10px;
         }
         .message-box__content__message {
           background-color: rgb(255, 255, 255) !important;
           color: black !important;
+          .reaction-emotion {
+            
+          }
+        }
+        .reaction-emotion-picker {
+          position: absolute;
+          top: -35px;
+          left: 0px;
+          right: auto;
         }
       }
     }

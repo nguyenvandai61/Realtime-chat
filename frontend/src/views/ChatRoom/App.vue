@@ -19,6 +19,7 @@
               :is_guest="message.is_guest"
               :avatar="user.avatar"
               :content="message.content"
+              :reaction_emotions="message.reaction_emotions"
             />
           </div>
         </div>
@@ -101,6 +102,7 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 .chat-room__body {
+  background-color: rgb(215, 240, 231);
   display: block;
   position: relative;
   padding: 0px 10px 10px 10px;
@@ -122,11 +124,11 @@ export default Vue.extend({
     }
   }
   .chat-room__body__input {
-    margin: 3px;
+    // margin: 3px;
     position: fixed;
     width: 100%;
     bottom: 0;
-    padding-right: 25px;
+    background-color: white;
     .chat-room__body__input__text-field {
       flex-basis: 1;
       flex-grow: 1;
