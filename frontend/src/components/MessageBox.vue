@@ -16,11 +16,15 @@
           v-longpress-stop="handleLongPressStop"
         >
           <span>{{ content }}</span>
-          <reaction-emotion :emotions="reaction_emotions"></reaction-emotion>
+          <reaction-emotion
+            :emotions="reaction_emotions"
+            :emotion_picked="{ id: 1 }"
+          ></reaction-emotion>
         </v-card>
         <reaction-emotion-picker
           v-show="is_show_emotion_picker"
           :emotion_picked="{}"
+          @emotion-picked-off="handleLongPressStop"
         ></reaction-emotion-picker>
       </div>
     </div>
@@ -61,7 +65,7 @@ export default Vue.extend({
   },
   data() {
     return {
-      is_show_emotion_picker: false,
+      is_show_emotion_picker: true,
     };
   },
   methods: {
