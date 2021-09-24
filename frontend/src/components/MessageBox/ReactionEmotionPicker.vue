@@ -47,8 +47,8 @@ export default Vue.extend({
     emotionClicked(index) {
       this.emotion_picked = this.emotions[index];
       this.$emit("emotion-picked-off", this.emotion_picked);
-    }
-  }
+    },
+  },
 });
 </script>
 <style lang="scss" scoped>

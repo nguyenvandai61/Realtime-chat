@@ -74,7 +74,7 @@ export default Vue.extend({
     },
     handleLongPressStop(): void {
       this.is_show_emotion_picker = false;
-    }
+    },
   },
 });
 </script>
