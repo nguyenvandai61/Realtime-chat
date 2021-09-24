@@ -10,11 +10,18 @@
         <div v-if="is_guest" class="message-box__content__name">
           <span>{{ name }}</span>
         </div>
-        <v-card class="message-box__content__message">
+        <v-card
+          class="message-box__content__message"
+          v-longpress="handleLongPress"
+          v-longpress-stop="handleLongPressStop"
+        >
           <span>{{ content }}</span>
           <reaction-emotion :emotions="reaction_emotions"></reaction-emotion>
         </v-card>
-        <reaction-emotion-picker :emotion_picked="{}"></reaction-emotion-picker>
+        <reaction-emotion-picker
+          v-show="is_show_emotion_picker"
+          :emotion_picked="{}"
+        ></reaction-emotion-picker>
       </div>
     </div>
     <div class="message-box__time">
@@ -26,6 +33,7 @@
 import Vue from "vue";
 import ReactionEmotion from "./MessageBox/ReactionEmotion.vue";
 import ReactionEmotionPicker from "./MessageBox/ReactionEmotionPicker.vue";
+import "@/directives/longpress";
 
 export default Vue.extend({
   name: "MessageBox",
@@ -39,9 +47,7 @@ export default Vue.extend({
     avatar: {
       type: String,
     },
-    content: {
-      type: Object,
-    },
+    content: {},
     time: {
       type: String,
     },
@@ -52,6 +58,19 @@ export default Vue.extend({
   components: {
     ReactionEmotion,
     ReactionEmotionPicker,
+  },
+  data() {
+    return {
+      is_show_emotion_picker: false,
+    };
+  },
+  methods: {
+    handleLongPress(): void {
+      this.is_show_emotion_picker = true;
+    },
+    handleLongPressStop(): void {
+      this.is_show_emotion_picker = false;
+    }
   },
 });
 </script>
@@ -98,7 +117,6 @@ export default Vue.extend({
           background-color: rgb(255, 255, 255) !important;
           color: black !important;
           .reaction-emotion {
-            
           }
         }
         .reaction-emotion-picker {
