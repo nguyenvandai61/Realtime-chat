@@ -28,20 +28,30 @@ class PublicRoomMixin(models.Model):
     # The room's messages.
     messages = models.ManyToManyField('Message', related_name='rooms');
 
+class RoomThemeMixin(models.Model):
+    theme = models.ForeignKey('Theme', on_delete=models.DO_NOTHING)
 
-class Room(models.Model):
+    class Meta:
+        abstract = True;
+
+class Room(RoomThemeMixin):
     id = models.AutoField(primary_key=True)
     is_private = models.BooleanField(default=False)
     name = models.CharField(max_length=255)
     # The room's owner.
     owner = models.ForeignKey('User', on_delete=models.CASCADE);
     created_at = models.DateTimeField(auto_now_add=True)
-    theme = models.CharField(max_length=255, default='default')
-    no_members = models.IntegerField(default=0)
-    last_message = models.CharField(max_length=255, default='')
-
+    no_members = models.IntegerField(default=1)
+    last_message = models.ForeignKey('Message', related_name="last_message", on_delete=models.CASCADE, null=True, blank=True)
+    messages = models.ManyToManyField('Message', related_name='rooms')
+    
     def __str__(self):
         return self.name
     
     def __repr__(self):
         return self.name
+    
+    class Meta:
+        db_table = 'room'
+
+

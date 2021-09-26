@@ -25,12 +25,13 @@ class UserDetailMixin(models.Model):
     bio = models.TextField(max_length=500, blank=True)
     location = models.CharField(max_length=30, blank=True)
     birth_date = models.DateField(null=True, blank=True)
+
+    class Meta:
+        abstract = True
     
 
 class User(DjangoUser, UserActiveMixin, UserDetailMixin):
     avatar = models.ImageField(upload_to='avatars/', blank=True)
-    first_name = models.CharField(max_length=255, blank=True)
-    last_name = models.CharField(max_length=255, blank=True)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -41,4 +42,4 @@ class User(DjangoUser, UserActiveMixin, UserDetailMixin):
     class Meta:
         verbose_name = _('user')
         verbose_name_plural = _('users')
-        db_table = 'auth_user'
+        db_table = 'user'

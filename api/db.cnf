@@ -1,0 +1,5 @@
+[client]
+database = 'realtime_chat'
+host = 'localhost'
+user = 'root'
+password = 'dainguyen'
