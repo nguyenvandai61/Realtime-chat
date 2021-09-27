@@ -19,4 +19,15 @@ from rest_framework import routers, serializers, viewsets
 from realtime_chat import urls
 urlpatterns = [
     path('', include(urls)),
+    
+]
+
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
+
+urlpatterns += [
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]

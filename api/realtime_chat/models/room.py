@@ -44,6 +44,7 @@ class Room(RoomThemeMixin):
     no_members = models.IntegerField(default=1)
     last_message = models.ForeignKey('Message', related_name="last_message", on_delete=models.CASCADE, null=True, blank=True)
     messages = models.ManyToManyField('Message', related_name='rooms')
+
     
     def __str__(self):
         return self.name
